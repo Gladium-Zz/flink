@@ -22,10 +22,10 @@ public class BoundedStreamWordCount {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         //2.读取文件
-        DataStreamSource<String> lineDateStreamSource = env.readTextFile("input/words.text");
+        DataStreamSource<String> lineDataStreamSource = env.readTextFile("input/words.text");
 
         //3.转换计算
-        SingleOutputStreamOperator<Tuple2<String, Long>> wordAndOneTuple = lineDateStreamSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
+        SingleOutputStreamOperator<Tuple2<String, Long>> wordAndOneTuple = lineDataStreamSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
             String[] words = line.split(" ");
             for (String word : words) {
                 out.collect(Tuple2.of(word, 1L));
