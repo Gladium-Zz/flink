@@ -30,7 +30,6 @@ public class BoundedStreamWordCount {
             for (String word : words) {
                 out.collect(Tuple2.of(word, 1L));
             }
-
         })
         .returns(Types.TUPLE(Types.STRING, Types.LONG));
 
