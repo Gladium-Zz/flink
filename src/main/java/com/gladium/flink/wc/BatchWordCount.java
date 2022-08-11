@@ -1,4 +1,4 @@
-package com.gladium.flink;
+package com.gladium.flink.wc;
 
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.ExecutionEnvironment;

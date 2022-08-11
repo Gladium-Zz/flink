@@ -1,5 +1,6 @@
-package com.gladium.flink;
+package com.gladium.flink.wc;
 
+import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -20,6 +21,10 @@ public class BoundedStreamWordCount {
     public static void main(String[] args) throws Exception {
         // 1.创建流式执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        // 禁用算子链
+        env.disableOperatorChaining();
+        // 批处理模式 or /bin/flink run -Dexecution.runtime-mode=BATCH
+        env.setRuntimeMode(RuntimeExecutionMode.BATCH);
 
         //2.读取文件
         DataStreamSource<String> lineDataStreamSource = env.readTextFile("input/words.text");
@@ -43,7 +48,7 @@ public class BoundedStreamWordCount {
 
         // 启动执行
         env.execute();
-        
+
 
     }
 
